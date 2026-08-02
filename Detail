@@ -1,0 +1,22 @@
+1. The Core InfrastructureStandard Libraries#include <stdio.h>: Handles standard input and output functions (like printf and scanf).#include <math.h>: The heart of the calculator. This library provides advanced mathematical functions such as pow(), sqrt(), sin(), log10(), and log().#include <stdlib.h>: Used here for standard system utilities.Constant Definitions#define PI 3.14159265358979323846: C does not have a native, universally standardized value for $\pi$ built into every compiler environment. Defining this precisely is critical for accurate trigonometric conversions.2. The Architecture & Flow ControlThe program relies on an infinite event loop (while (1)) to keep the calculator running continuously. This mimics a real physical calculator, ensuring it doesn't shut down after processing a single calculation.       [ Start Program ]
+               │
+               ▼
+     ┌───────────────────┐
+  ──►│   Display Menu    │
+ │   └─────────┬─────────┘
+ │             ▼
+ │   [ Read User Selection ]
+ │             │
+ │             ├─► (Choice == 12) ──► [ Shut Down Program ]
+ │             │
+ │             └─► (Invalid Choice) ──► Loop Back
+ │             │
+ │             ▼
+ │   [ Request Numerical Input ]
+ │   (1 or 2 variables depending on math function)
+ │             │
+ │             ▼
+ │      [ Switch Case ] ──► [ Process Math Execution & Error Check ]
+ │             │
+               └─────────────────────────┘
+Selection HandlingMenu Display: The displayMenu() function prints a clean command-line interface mapping integers (1–12) to mathematical operations.Input Reading & Extraction: scanf("%d", &choice) captures the user's intent. If the input is not a number, the program safely breaks execution rather than entering an infinite garbage-input loop.Boundary Checks: The program instantly checks if the selection falls between 1 and 12. If it doesn't, it displays an error and skips the rest of the loop using continue.3. Smart Input OptimizationInstead of asking the user for inputs inside every individual math case, the program groups the operations to optimize input collection:Two-Operand Operations (Cases 1–5): Addition, subtraction, multiplication, division, and exponents ($x^y$) require two distinct numbers (num1 and num2).Single-Operand Operations (Cases 6–11): Square roots, logarithms, and trigonometric functions only require a single input (num1).4. Advanced Mathematical Computations & ConstraintsInside the switch(choice) block, the exact mathematical formulas are processed. High-precision floating-point execution is achieved by declaring the variables as double.Trigonometric Angular CalibrationComputers process angles in radians, whereas humans naturally think in degrees. If a user wants to find $\sin(90^\circ)$, typing 90 directly into C's native sin() function would evaluate it as 90 radians, yielding an incorrect result.The program intercepts choices 7, 8, and 9 and applies the standard angular conversion formula:$$\text{Radians} = \text{Degrees} \times \left(\frac{\pi}{180}\right)$$Strict Edge-Case Validation (Fail-Safes)To prevent unexpected application crashes or outputs like NaN (Not a Number) or Inf (Infinity), the code actively validates data boundaries before passing them to the CPU:Division by Zero: Before executing division (/), it ensures num2 != 0.Real Domain Radicals: Before executing sqrt(), it verifies num1 >= 0, since negative square roots result in imaginary numbers.Logarithmic Asymptotes: For both log10() (common log) and log() (natural log $\ln$), the input must be strictly greater than zero (num1 > 0), as logarithms approaching zero head toward negative infinity.
