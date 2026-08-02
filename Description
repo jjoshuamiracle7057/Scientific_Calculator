@@ -1,0 +1,3 @@
+A terminal-based scientific calculator implemented in C. Replicates Casio-style functions including multi-operand arithmetic, exponentiation ($x^y$), square roots, base-10 logs, natural logs ($\ln$), and degree-to-radian calibrated trigonometric operations.
+A command-line scientific calculator built in pure C, featuring a menu-driven interface for complex arithmetic, logarithms, trigonometry, and robust edge-case error validation.
+A robust, terminal-based scientific calculator built in C using the standard math library. Features a menu-driven layout supporting advanced arithmetic, exponents, root calculations, base-10 logarithms, natural logs, and radian-calibrated trig functions with built-in domain error validation.
